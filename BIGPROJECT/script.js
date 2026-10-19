@@ -470,6 +470,12 @@ loadGame();
 buildAnimalPanel();
 updateAll();
 
+// ============================================================
+// BACKGROUND MUSIC
+// No controls. Browsers block sound until the player interacts
+// with the page, so it starts on the first click or key press.
+// ============================================================
+
 const bgm = document.getElementById("bgm");
 bgm.volume = 0.4; // 0.0 (silent) to 1.0 (full volume)
 
@@ -482,6 +488,15 @@ function startMusic() {
     // Still blocked or file missing; try again on the next interaction.
   });
 }
+
+// If the file can't be loaded, say so in the browser console (F12 > Console).
+bgm.addEventListener("error", () => {
+  console.warn(
+    "Background music failed to load: " + bgm.currentSrc +
+    "\nCheck that the file is uploaded next to index.html and that the " +
+    "name matches exactly (GitHub is case-sensitive)."
+  );
+});
 
 // Try right away (works if the browser allows autoplay), then fall back.
 startMusic();
