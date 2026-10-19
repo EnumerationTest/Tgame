@@ -469,3 +469,22 @@ window.addEventListener("beforeunload", saveGame);
 loadGame();
 buildAnimalPanel();
 updateAll();
+
+const bgm = document.getElementById("bgm");
+bgm.volume = 0.4; // 0.0 (silent) to 1.0 (full volume)
+
+function startMusic() {
+  bgm.play().then(() => {
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("keydown", startMusic);
+    document.removeEventListener("touchstart", startMusic);
+  }).catch(() => {
+    // Still blocked or file missing; try again on the next interaction.
+  });
+}
+
+// Try right away (works if the browser allows autoplay), then fall back.
+startMusic();
+document.addEventListener("click", startMusic);
+document.addEventListener("keydown", startMusic);
+document.addEventListener("touchstart", startMusic);
