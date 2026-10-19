@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Milk Incremental Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game">
+
+    <!-- LEFT SIDE -->
+    <aside id="sidebar">
+
+      <section class="stats">
+        <div id="mpc">MPC: 1.00</div>
+        <div id="milk">Milk: 0.00</div>
+        <button id="milkBtn" class="btn btn-milk">Milkers</button>
+
+        <div id="cash">Cash: $0.00</div>
+        <button id="sellBtn" class="btn btn-sell">Sell Milk</button>
+      </section>
+
+      <section class="layer">
+        <h2 class="title title-reset">RESET LAYERS</h2>
+        <div id="rebirthInfo">Each Rebirth multiplies MPC by 1.50x</div>
+        <div id="rebirthCurrent">Current Rebirth MPC Multiplier: 1.00x</div>
+        <div class="note">Rebirth resets cash, milk &amp; animals</div>
+        <div id="rebirths">Rebirths: 0</div>
+        <div id="rebirthPower">Rebirth Power: 1.50x</div>
+        <button id="rebirthBtn" class="btn btn-rebirth">Rebirth $1.00M</button>
+      </section>
+
+      <section class="layer">
+        <h2 class="title title-prestige">PRESTIGE</h2>
+        <div class="note">Prestige resets Rebirths, Milk, Cash,<br>Animals, animal costs &amp; Rebirth cost</div>
+        <div id="prestigeMilkMult">Prestige Milk Multiplier: 1.00x</div>
+        <div id="prestigeMult">Prestige Multiplier: 1.00x</div>
+        <div id="prestiges">Prestiges: 0</div>
+        <div id="prestigeCost">Prestige Cost: 5 Rebirths</div>
+        <div id="autoMilkLabel">Auto Milkers: LOCKED</div>
+        <div id="autoMilkRate">Auto Milkers Rate: 0.001s</div>
+        <button id="autoMilkBtn" class="btn btn-auto" disabled>Auto Milkers Locked</button>
+        <button id="prestigeBtn" class="btn btn-prestige">Prestige 5 Rebirths</button>
+      </section>
+
+    </aside>
+
+    <!-- RIGHT SIDE: ANIMALS -->
+    <main id="animalScroll">
+      <div id="animalGrid"></div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

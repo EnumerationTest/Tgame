@@ -1,0 +1,291 @@
+/* ============================================================
+   THEME COLORS
+   Change any color here and the whole game updates.
+   ============================================================ */
+
+:root {
+  --bg-main:      #171421;   /* main window + sidebar */
+  --bg-card:      #242033;   /* animal cards */
+  --primary:      #8B5CF6;   /* buy buttons, normal upgrades */
+  --accent:       #C084FC;   /* headings, highlights, key stats */
+  --text:         #F1F0F7;   /* labels, names, descriptions */
+
+  --rebirth:      #22D3EE;   /* rebirth (cyan) */
+  --prestige:     #F59E0B;   /* prestige (gold) */
+  --cash:         #22C55E;   /* money + selling */
+  --locked:       #EF4444;   /* unavailable / restricted */
+
+  --text-muted:   #A8A3BD;   /* secondary text, derived from --text */
+  --border:       #342E4A;   /* subtle panel borders */
+  --on-light:     #171421;   /* dark text for use on bright buttons */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: var(--bg-main);
+  color: var(--text);
+  color-scheme: dark;
+}
+
+#game {
+  display: flex;
+  gap: 12px;
+  height: 100vh;
+  padding: 12px;
+  background: var(--bg-main);
+}
+
+/* ---------- Sidebar ---------- */
+
+#sidebar {
+  flex: 0 0 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-right: 4px;
+  background: var(--bg-main);
+}
+
+.stats,
+.layer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stats {
+  align-items: flex-start;
+  padding-left: 50px;
+}
+
+.stats > div {
+  margin-top: 8px;
+}
+
+.layer {
+  padding-left: 10px;
+}
+
+/* Key stats */
+#mpc {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#cash {
+  color: var(--cash);
+  font-weight: bold;
+}
+
+/* ---------- Section headings ---------- */
+
+.title {
+  margin: 4px 0;
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title-reset {
+  color: var(--rebirth);
+}
+
+.title-prestige {
+  color: var(--prestige);
+}
+
+.note {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Rebirth stats are cyan, Prestige stats are gold */
+#rebirthInfo,
+#rebirthCurrent,
+#rebirths,
+#rebirthPower {
+  color: var(--rebirth);
+}
+
+#prestigeMilkMult,
+#prestigeMult,
+#prestiges,
+#prestigeCost {
+  color: var(--prestige);
+}
+
+#autoMilkRate {
+  color: var(--text-muted);
+}
+
+/* Auto Milkers status: red when locked/off limits, accent when on */
+#autoMilkLabel {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+#autoMilkLabel.locked {
+  color: var(--locked);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 7px 14px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--on-light);
+  cursor: pointer;
+  align-self: flex-start;
+  transition: filter 0.12s ease, transform 0.05s ease;
+}
+
+.btn:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.btn:active:not(:disabled) {
+  filter: brightness(0.9);
+  transform: translateY(1px);
+}
+
+.btn:focus-visible,
+.animal-box .buy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-milk {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-sell {
+  background: var(--cash);
+}
+
+.btn-rebirth {
+  background: var(--rebirth);
+}
+
+.btn-prestige {
+  background: var(--prestige);
+}
+
+.btn-auto {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Locked / unavailable actions */
+.btn:disabled {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: var(--locked);
+  color: var(--locked);
+  cursor: not-allowed;
+}
+
+/* ---------- Animals ---------- */
+
+#animalScroll {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+#animalGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+}
+
+.animal-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.animal-box .owned {
+  font-weight: bold;
+  color: var(--text);
+}
+
+.animal-box .bonus {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.animal-box .buy {
+  margin-top: 4px;
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.55;                 /* can't afford it yet */
+  transition: opacity 0.12s ease, filter 0.12s ease;
+}
+
+.animal-box .buy.affordable {
+  opacity: 1;                    /* can afford it now */
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.animal-box .buy:hover {
+  filter: brightness(1.12);
+}
+
+.animal-box .buy:active {
+  filter: brightness(0.9);
+}
+
+/* ---------- Scrollbars ---------- */
+
+#sidebar,
+#animalScroll {
+  scrollbar-color: var(--primary) var(--bg-main);
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 760px) {
+  #game {
+    flex-direction: column;
+    height: auto;
+  }
+
+  #sidebar {
+    flex: none;
+    overflow: visible;
+  }
+
+  #animalScroll {
+    overflow: visible;
+  }
+
+  #animalGrid {
+    grid-template-columns: 1fr;
+  }
+}
